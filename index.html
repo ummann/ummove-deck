@@ -517,78 +517,63 @@
     .reveal .fragment.visible { opacity: 1; transform: none; }
     .reveal .fragment:not(.visible) { opacity: 0; transform: translateY(16px); }
 
-    /* ===== MOBILE ===== */
+    /* ===== MOBILE (portrait canvas) ===== */
+
+    .mobile-only { display: none; }
 
     @media screen and (max-width: 768px) {
-      .reveal .slides section { padding: 30px 24px; }
-      .reveal h2 { font-size: 1.8em; }
-      .reveal h3 { font-size: 1.3em; }
-      .reveal p { font-size: 1em; }
+      .reveal .slides section { padding: 36px 28px; }
+      .reveal h2 { font-size: 2.2em; }
 
-      .logo-hero { width: 120px; height: 120px; }
-      .logo-hero-wrap { width: 120px; height: 120px; }
-      .orbit-ring-1 { width: 220px; height: 220px; }
-      .orbit-ring-2 { width: 320px; height: 320px; }
+      .logo-hero { width: 100px; height: 100px; }
+      .logo-hero-wrap { width: 100px; height: 100px; }
+      .orbit-ring-1 { width: 180px; height: 180px; }
+      .orbit-ring-2 { width: 260px; height: 260px; }
 
-      .headline { font-size: 1.6em; max-width: 100%; }
-      .headline br { display: none; }
+      .headline { font-size: 2em; }
 
-      .big-num { font-size: 6em; }
-      .big-num-label { font-size: 0.9em; margin-top: 20px; }
+      .big-num { font-size: 7em; }
+      .big-num-label { font-size: 0.85em; margin-top: 24px; }
 
-      .wordmark { font-size: 3.5em; }
-      .wordmark-sub { font-size: 0.9em; margin-top: 16px; }
-      .logo-sm { width: 40px; height: 40px; margin-bottom: 24px; }
+      .wordmark { font-size: 3.2em; }
+      .wordmark-sub { font-size: 0.85em; margin-top: 16px; }
+      .logo-sm { width: 36px; height: 36px; margin-bottom: 20px; }
 
-      .one-liner { font-size: 1.6em; }
+      .one-liner { font-size: 1.8em; }
 
-      .steps-label { font-size: 0.8em; margin-bottom: 36px; }
-      .steps-col { gap: 20px; max-width: 100%; }
-      .step { gap: 20px; }
-      .step-num { font-size: 1.8em; width: 40px; }
-      .step-label { font-size: 0.85em; }
-      .step-divider { margin-left: 60px; }
+      .steps-label { font-size: 0.75em; margin-bottom: 32px; }
+      .steps-col { gap: 16px; }
+      .step { gap: 16px; }
+      .step-num { font-size: 1.6em; width: 32px; }
+      .step-label { font-size: 0.75em; }
+      .step-divider { margin-left: 48px; }
 
-      .benefit { font-size: 1.8em; }
-      .benefit br { display: none; }
-      .benefit-desc { font-size: 0.9em; margin-top: 24px; max-width: 100%; }
+      .benefit { font-size: 2em; }
+      .benefit-desc { font-size: 0.8em; margin-top: 24px; }
 
       .partner-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        margin-top: 32px;
+        gap: 10px;
+        margin-top: 28px;
         max-width: 100%;
       }
-      .partner-card { padding: 24px 16px; }
-      .card-icon { width: 36px; height: 36px; margin-bottom: 12px; }
-      .card-icon svg { width: 16px; height: 16px; }
-      .card-label { font-size: 0.75em; }
+      .partner-card { padding: 20px 12px; border-radius: 14px; }
+      .card-icon { width: 32px; height: 32px; margin-bottom: 10px; border-radius: 8px; }
+      .card-icon svg { width: 14px; height: 14px; }
+      .card-label { font-size: 0.65em; }
 
-      .quote-text { font-size: 1.3em; max-width: 100%; }
-      .quote-attr { margin-top: 24px; font-size: 0.75em; }
+      .quote-text { font-size: 1.4em; }
+      .quote-attr { margin-top: 24px; font-size: 0.7em; }
 
-      .cta-head { font-size: 1.6em; }
-      .cta-divider { margin: 24px auto; }
-      .cta-email { font-size: 1.1em; }
-      .cta-url { font-size: 0.85em; }
+      .cta-head { font-size: 1.8em; }
+      .cta-email { font-size: 1em; }
+      .cta-url { font-size: 0.75em; }
 
       .logo-end { width: 80px; height: 80px; }
-      .end-tag { margin-top: 24px; font-size: 0.85em; }
+      .end-tag { margin-top: 24px; font-size: 0.8em; }
 
-      .blob-1 { width: 300px; height: 300px; }
-      .blob-2 { width: 250px; height: 250px; }
-    }
-
-    @media screen and (max-width: 480px) {
-      .reveal h2 { font-size: 1.5em; }
-      .headline { font-size: 1.35em; }
-      .big-num { font-size: 4.5em; }
-      .wordmark { font-size: 2.8em; }
-      .one-liner { font-size: 1.3em; }
-      .benefit { font-size: 1.5em; }
-      .partner-grid { grid-template-columns: 1fr; gap: 12px; }
-      .quote-text { font-size: 1.1em; }
-      .cta-head { font-size: 1.3em; }
+      .blob-1 { width: 250px; height: 250px; }
+      .blob-2 { width: 200px; height: 200px; }
     }
   </style>
 </head>
@@ -743,22 +728,27 @@
 
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script>
+    const mobile = window.innerWidth <= 768;
+
     Reveal.initialize({
       hash: true,
       transition: 'fade',
       transitionSpeed: 'default',
       backgroundTransition: 'fade',
       center: true,
-      controls: true,
+      controls: !mobile,
       controlsLayout: 'edges',
       progress: true,
       slideNumber: false,
-      width: 1920,
-      height: 1080,
-      margin: 0.04,
+      touch: true,
+      width: mobile ? 430 : 1920,
+      height: mobile ? 932 : 1080,
+      margin: mobile ? 0.06 : 0.04,
       minScale: 0.1,
       maxScale: 2.0,
-      disableLayout: false,
+
+      // Mobile: show all fragments immediately
+      ...(mobile && { fragments: false }),
     });
   </script>
 </body>
