@@ -522,58 +522,73 @@
     .mobile-only { display: none; }
 
     @media screen and (max-width: 768px) {
-      .reveal .slides section { padding: 36px 28px; }
-      .reveal h2 { font-size: 2.2em; }
+      .reveal .slides section { padding: 32px 20px; }
+      .reveal h2 { font-size: 1.6em; }
+      .reveal h3 { font-size: 1.2em; }
+      .reveal p { font-size: 0.9em; }
 
-      .logo-hero { width: 100px; height: 100px; }
-      .logo-hero-wrap { width: 100px; height: 100px; }
-      .orbit-ring-1 { width: 180px; height: 180px; }
-      .orbit-ring-2 { width: 260px; height: 260px; }
+      /* Logo */
+      .logo-hero { width: 90px; height: 90px; }
+      .logo-hero-wrap { width: 90px; height: 90px; }
+      .orbit-ring-1 { width: 160px; height: 160px; }
+      .orbit-ring-2 { width: 230px; height: 230px; }
 
-      .headline { font-size: 2em; }
+      /* Headlines - smaller so they don't wrap extra lines */
+      .headline { font-size: 1.5em; max-width: 100%; }
 
-      .big-num { font-size: 7em; }
-      .big-num-label { font-size: 0.85em; margin-top: 24px; }
+      /* Big number */
+      .big-num { font-size: 5em; }
+      .big-num-label { font-size: 0.7em; margin-top: 16px; }
 
-      .wordmark { font-size: 3.2em; }
-      .wordmark-sub { font-size: 0.85em; margin-top: 16px; }
-      .logo-sm { width: 36px; height: 36px; margin-bottom: 20px; }
+      /* Wordmark */
+      .wordmark { font-size: 2.6em; }
+      .wordmark-sub { font-size: 0.7em; margin-top: 12px; letter-spacing: 0.04em; }
+      .logo-sm { width: 32px; height: 32px; margin-bottom: 16px; }
 
-      .one-liner { font-size: 1.8em; }
+      /* One liner */
+      .one-liner { font-size: 1.4em; line-height: 1.6; }
 
-      .steps-label { font-size: 0.75em; margin-bottom: 32px; }
-      .steps-col { gap: 16px; }
-      .step { gap: 16px; }
-      .step-num { font-size: 1.6em; width: 32px; }
-      .step-label { font-size: 0.75em; }
-      .step-divider { margin-left: 48px; }
+      /* Steps - compact vertical */
+      .steps-label { font-size: 0.65em; margin-bottom: 24px; }
+      .steps-col { gap: 10px; max-width: 100%; }
+      .step { gap: 12px; }
+      .step-num { font-size: 1.3em; width: 28px; }
+      .step-label { font-size: 0.65em; }
+      .step-divider { margin-left: 40px; }
 
-      .benefit { font-size: 2em; }
-      .benefit-desc { font-size: 0.8em; margin-top: 24px; }
+      /* Benefits */
+      .benefit { font-size: 1.5em; }
+      .benefit-desc { font-size: 0.7em; margin-top: 16px; max-width: 100%; }
 
+      /* Partner grid - 2 cols, very compact */
       .partner-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 28px;
+        gap: 8px;
+        margin-top: 20px;
         max-width: 100%;
       }
-      .partner-card { padding: 20px 12px; border-radius: 14px; }
-      .card-icon { width: 32px; height: 32px; margin-bottom: 10px; border-radius: 8px; }
-      .card-icon svg { width: 14px; height: 14px; }
-      .card-label { font-size: 0.65em; }
+      .partner-card { padding: 14px 10px; border-radius: 10px; }
+      .card-icon { width: 28px; height: 28px; margin-bottom: 8px; border-radius: 6px; }
+      .card-icon svg { width: 12px; height: 12px; }
+      .card-label { font-size: 0.55em; line-height: 1.3; }
 
-      .quote-text { font-size: 1.4em; }
-      .quote-attr { margin-top: 24px; font-size: 0.7em; }
+      /* Quote */
+      .quote-text { font-size: 1.1em; max-width: 100%; }
+      .quote-attr { margin-top: 16px; font-size: 0.6em; }
 
-      .cta-head { font-size: 1.8em; }
-      .cta-email { font-size: 1em; }
-      .cta-url { font-size: 0.75em; }
+      /* CTA */
+      .cta-head { font-size: 1.4em; }
+      .cta-divider { margin: 20px auto; width: 40px; }
+      .cta-email { font-size: 0.9em; margin-top: 4px; }
+      .cta-url { font-size: 0.65em; margin-top: 10px; }
 
-      .logo-end { width: 80px; height: 80px; }
-      .end-tag { margin-top: 24px; font-size: 0.8em; }
+      /* End */
+      .logo-end { width: 64px; height: 64px; }
+      .end-tag { margin-top: 16px; font-size: 0.7em; }
 
-      .blob-1 { width: 250px; height: 250px; }
-      .blob-2 { width: 200px; height: 200px; }
+      /* Blobs smaller */
+      .blob-1 { width: 200px; height: 200px; }
+      .blob-2 { width: 160px; height: 160px; }
     }
   </style>
 </head>
