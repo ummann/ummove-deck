@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ummove — Partner Studios</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #5BC5F2;
+      --cyan-dim: rgba(91, 197, 242, 0.6);
+      --navy: #0A1628;
+      --navy-mid: #111D30;
+      --white: #F2F5FA;
+      --gray: #7E8A9E;
+      --gray-light: #A5ADBC;
+    }
+
+    /* ===== KEYFRAMES ===== */
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(91,197,242,0.2)); }
+      50% { filter: drop-shadow(0 0 70px rgba(91,197,242,0.45)); }
+    }
+
+    @keyframes glow-text {
+      0%, 100% { text-shadow: 0 0 30px rgba(91,197,242,0.15); }
+      50% { text-shadow: 0 0 60px rgba(91,197,242,0.4), 0 0 100px rgba(91,197,242,0.15); }
+    }
+
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes count-in {
+      0% { transform: scale(0.5); opacity: 0; filter: blur(8px); }
+      60% { transform: scale(1.04); opacity: 1; filter: blur(0); }
+      100% { transform: scale(1); opacity: 1; filter: blur(0); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes draw-line {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes blob-move-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(80px, -60px) scale(1.1); }
+      66% { transform: translate(-40px, 40px) scale(0.95); }
+    }
+
+    @keyframes blob-move-2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-60px, 50px) scale(0.9); }
+      66% { transform: translate(50px, -40px) scale(1.08); }
+    }
+
+    @keyframes underline-grow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes orbit-slow {
+      from { transform: rotate(0deg) translateX(160px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(160px) rotate(-360deg); }
+    }
+
+    @keyframes orbit-slow-rev {
+      from { transform: rotate(0deg) translateX(110px) rotate(0deg); }
+      to { transform: rotate(-360deg) translateX(110px) rotate(360deg); }
+    }
+
+    /* ===== BASE ===== */
+
+    .reveal-viewport { background: var(--navy); }
+
+    .reveal {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--white);
+    }
+
+    .reveal .slides section {
+      text-align: center;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 60px 80px;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .reveal h2 { font-size: 2.6em; }
+    .reveal h3 { font-size: 1.6em; }
+    .reveal p { font-weight: 400; font-size: 1.2em; line-height: 1.6; color: var(--gray-light); margin: 0; }
+
+    .cyan { color: var(--cyan); }
+    .w { color: var(--white); }
+    .semi { font-weight: 600; }
+
+    .reveal .progress span { background: var(--cyan); }
+    .reveal .controls button { color: rgba(91,197,242,0.5); }
+    .reveal .slide-background { background: var(--navy); }
+
+    /* ===== ANIMATED BLOBS BG ===== */
+
+    .blobs {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.07;
+    }
+
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: var(--cyan);
+      top: -10%; right: -5%;
+      animation: blob-move-1 20s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 400px; height: 400px;
+      background: #8B5CF6;
+      bottom: -10%; left: -5%;
+      animation: blob-move-2 25s ease-in-out infinite;
+    }
+
+    /* ===== LOGO ===== */
+
+    .logo-hero {
+      width: 180px;
+      height: 180px;
+      animation: float 5s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+    }
+
+    .logo-hero-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border: 1px solid rgba(91,197,242,0.06);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .orbit-ring-1 { width: 320px; height: 320px; }
+    .orbit-ring-2 { width: 460px; height: 460px; border-color: rgba(91,197,242,0.03); }
+
+    .orbit-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      margin: -3px 0 0 -3px;
+      box-shadow: 0 0 16px rgba(91,197,242,0.5);
+    }
+
+    .orbit-dot-1 { animation: orbit-slow 30s linear infinite; }
+    .orbit-dot-2 { animation: orbit-slow-rev 22s linear infinite; width: 4px; height: 4px; margin: -2px 0 0 -2px; opacity: 0.5; }
+
+    .logo-sm {
+      width: 56px; height: 56px;
+      filter: drop-shadow(0 0 30px rgba(91,197,242,0.25));
+      margin-bottom: 36px;
+    }
+
+    .logo-end {
+      width: 120px; height: 120px;
+      animation: float 5s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+    }
+
+    /* ===== WORDMARK ===== */
+
+    .wordmark {
+      font-family: 'Outfit', sans-serif;
+      font-size: 5.5em;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      background: linear-gradient(90deg, var(--white) 0%, var(--cyan) 50%, var(--white) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+    }
+
+    .reveal .present .wordmark { animation: scale-in 0.7s cubic-bezier(0.34,1.56,0.64,1) both 0.15s, shimmer 5s linear infinite 0.7s; }
+
+    .wordmark-sub {
+      font-size: 1.15em;
+      font-weight: 400;
+      color: var(--gray-light);
+      margin-top: 24px;
+      letter-spacing: 0.06em;
+    }
+
+    .reveal .present .wordmark-sub { animation: fade-in-up 0.7s ease both 0.5s; }
+    .reveal .present .logo-sm { animation: scale-in 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+    /* ===== BIG NUMBER ===== */
+
+    .big-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11em;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--cyan);
+    }
+
+    .reveal .present .big-num { animation: count-in 0.9s cubic-bezier(0.34,1.56,0.64,1) both, glow-text 3s ease-in-out infinite 0.9s; }
+
+    .big-num-label {
+      font-size: 1.15em;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 32px;
+    }
+
+    .reveal .present .big-num-label { animation: fade-in-up 0.7s ease both 0.5s; }
+
+    .glow-bg { position: relative; }
+    .glow-bg::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(91,197,242,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ===== HEADLINE SLIDES ===== */
+
+    .headline {
+      font-size: 2.8em;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+    }
+
+    .headline .semi { font-weight: 600; }
+
+    .reveal .present .headline { animation: slide-up 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+    /* ===== ONE LINER ===== */
+
+    .one-liner { font-size: 2.6em; font-weight: 400; line-height: 1.5; }
+    .one-liner span { display: block; }
+    .one-liner .bold { font-weight: 600; }
+
+    .reveal .present .one-liner span:nth-child(1) { animation: fade-in-up 0.6s ease both 0.1s; }
+    .reveal .present .one-liner span:nth-child(2) { animation: fade-in-up 0.6s ease both 0.45s; }
+    .reveal .present .one-liner span:nth-child(3) { animation: fade-in-up 0.6s ease both 0.8s; }
+
+    /* ===== BENEFIT ===== */
+
+    .benefit {
+      font-size: 3.2em;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .benefit .cyan { position: relative; display: inline-block; font-weight: 600; }
+
+    .benefit .cyan::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 100%; height: 3px;
+      background: var(--cyan);
+      border-radius: 2px;
+      transform-origin: left;
+      transform: scaleX(0);
+      box-shadow: 0 0 12px rgba(91,197,242,0.3);
+    }
+
+    .reveal .present .benefit { animation: slide-up 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+    .reveal .present .benefit .cyan::after { animation: underline-grow 0.5s ease both 0.7s; }
+
+    .benefit-desc {
+      font-size: 1.1em;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 40px;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .reveal .present .benefit-desc { animation: fade-in-up 0.7s ease both 0.4s; }
+
+    /* ===== STEPS ===== */
+
+    .steps-label {
+      font-size: 0.95em;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 64px;
+    }
+
+    .steps-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      text-align: left;
+    }
+
+    .step-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4em;
+      font-weight: 600;
+      color: var(--cyan);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 56px;
+      text-align: right;
+    }
+
+    .step-label {
+      font-size: 1em;
+      font-weight: 400;
+      color: var(--gray-light);
+      line-height: 1.5;
+    }
+
+    .step-divider {
+      height: 1px;
+      background: rgba(91,197,242,0.08);
+      margin-left: 88px;
+    }
+
+    /* ===== PARTNER GRID ===== */
+
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 880px;
+      margin-top: 56px;
+    }
+
+    .partner-card {
+      background: rgba(91,197,242,0.03);
+      border: 1px solid rgba(91,197,242,0.06);
+      border-radius: 18px;
+      padding: 36px 20px;
+      transition: all 0.35s ease;
+    }
+
+    .partner-card:hover {
+      background: rgba(91,197,242,0.07);
+      border-color: rgba(91,197,242,0.15);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      margin: 0 auto 18px;
+      border-radius: 12px;
+      background: rgba(91,197,242,0.08);
+      border: 1px solid rgba(91,197,242,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon svg {
+      width: 20px; height: 20px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-label {
+      font-size: 0.82em;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.45;
+    }
+
+    /* ===== QUOTE ===== */
+
+    .quote-text {
+      font-size: 2em;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gray-light);
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .quote-attr {
+      font-size: 0.85em;
+      font-weight: 500;
+      color: var(--cyan);
+      margin-top: 40px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-style: normal;
+    }
+
+    .reveal .present .quote-text { animation: fade-in 1.2s ease both; }
+    .reveal .present .quote-attr { animation: fade-in-up 0.7s ease both 0.8s; }
+
+    /* ===== CTA ===== */
+
+    .cta-head { font-size: 2.6em; font-weight: 400; }
+    .cta-head .semi { font-weight: 600; }
+
+    .cta-divider {
+      width: 64px; height: 2px;
+      background: var(--cyan);
+      margin: 36px auto;
+      opacity: 0.5;
+      transform-origin: center;
+    }
+
+    .reveal .present .cta-divider { animation: draw-line 0.7s ease both 0.2s; }
+
+    .cta-email {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-top: 8px;
+    }
+
+    .cta-url {
+      font-size: 1em;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 16px;
+    }
+
+    .reveal .present .cta-head { animation: fade-in-up 0.6s ease both; }
+    .reveal .present .cta-email { animation: fade-in-up 0.6s ease both 0.35s; }
+    .reveal .present .cta-url { animation: fade-in-up 0.6s ease both 0.55s; }
+
+    /* ===== END ===== */
+
+    .end-tag {
+      font-size: 1em;
+      font-weight: 400;
+      color: var(--cyan-dim);
+      margin-top: 40px;
+      letter-spacing: 0.06em;
+    }
+
+    .reveal .present .logo-end { animation: scale-in 0.8s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .reveal .present .end-tag { animation: fade-in 1s ease both 0.5s; }
+
+    /* ===== FRAGMENTS ===== */
+
+    .reveal .fragment { transition: all 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .reveal .fragment.visible { opacity: 1; transform: none; }
+    .reveal .fragment:not(.visible) { opacity: 0; transform: translateY(16px); }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1. LOGO -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+        <div class="logo-hero-wrap">
+          <div class="orbit-ring orbit-ring-1"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+          <div class="orbit-dot orbit-dot-1"></div>
+          <div class="orbit-dot orbit-dot-2"></div>
+          <img src="./logo-plain.png" class="logo-hero" alt="Ummove">
+        </div>
+      </section>
+
+      <!-- 2. PROBLEMA -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <h2 class="headline">Tu estudio tiene lugares vacios.<br><span class="cyan semi">Nosotros los llenamos.</span></h2>
+      </section>
+
+      <!-- 3. BIG NUMBER -->
+      <section data-transition="fade" class="glow-bg">
+        <div class="big-num">40%</div>
+        <div class="big-num-label">de la capacidad promedio sin llenar</div>
+      </section>
+
+      <!-- 4. PREGUNTA -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <h2 class="headline">Y si pudieras<br><span class="cyan semi">llenar cada uno?</span></h2>
+      </section>
+
+      <!-- 5. REVEAL -->
+      <section data-transition="zoom" data-transition-speed="slow">
+        <div class="blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+        <img src="./logo-plain.png" class="logo-sm" alt="Ummove">
+        <div class="wordmark">ummove</div>
+        <div class="wordmark-sub">El marketplace de creditos fitness</div>
+      </section>
+
+      <!-- 6. ONE LINER -->
+      <section data-transition="fade">
+        <div class="one-liner">
+          <span>Un credito.</span>
+          <span class="bold w">Cualquier estudio.</span>
+          <span class="cyan">Una app.</span>
+        </div>
+      </section>
+
+      <!-- 7. PASOS -->
+      <section data-transition="fade">
+        <div class="steps-label">Asi de simple</div>
+        <div class="steps-col">
+          <div class="step fragment" data-fragment-index="1">
+            <div class="step-num">1</div>
+            <div class="step-label">Te registras y creas tu perfil de estudio</div>
+          </div>
+          <div class="step-divider fragment" data-fragment-index="2"></div>
+          <div class="step fragment" data-fragment-index="2">
+            <div class="step-num">2</div>
+            <div class="step-label">Defines cuantos lugares ofreces por clase</div>
+          </div>
+          <div class="step-divider fragment" data-fragment-index="3"></div>
+          <div class="step fragment" data-fragment-index="3">
+            <div class="step-num">3</div>
+            <div class="step-label">Usuarios Ummove descubren y reservan</div>
+          </div>
+          <div class="step-divider fragment" data-fragment-index="4"></div>
+          <div class="step fragment" data-fragment-index="4">
+            <div class="step-num">4</div>
+            <div class="step-label">Recibes pago cada quincena</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. BENEFIT 1 -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="benefit">Nuevos clientes.<br><span class="cyan">Cada semana.</span></div>
+        <div class="benefit-desc">Usuarios de Ummove descubren tu estudio y reservan sin que tu muevas un dedo.</div>
+      </section>
+
+      <!-- 9. BENEFIT 2 -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="benefit">Monetiza cada<br><span class="cyan">asiento vacio.</span></div>
+        <div class="benefit-desc">Los lugares que no vendes directamente ahora generan ingresos.</div>
+      </section>
+
+      <!-- 10. BENEFIT 3 -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="benefit">Cero costo de<br><span class="cyan">adquisicion.</span></div>
+        <div class="benefit-desc">Nosotros traemos los clientes. Tu solo das la clase.</div>
+      </section>
+
+      <!-- 11. PARTNER -->
+      <section data-transition="fade">
+        <h3>Ser <span class="cyan semi">Partner Ummove</span> incluye</h3>
+        <div class="partner-grid">
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="card-label">Perfil premium<br>en la app</div>
+          </div>
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div class="card-label">Dashboard de<br>analytics</div>
+          </div>
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="card-label">Marketing<br>digital</div>
+          </div>
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div class="card-label">Soporte<br>dedicado</div>
+          </div>
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="card-label">Badge Partner<br>para redes</div>
+          </div>
+          <div class="partner-card fragment">
+            <div class="card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="card-label">Pago quincenal<br>garantizado</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. QUOTE -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+        <div class="quote-text">"No vendemos creditos fitness.<br>Vendemos el habito de moverse."</div>
+        <div class="quote-attr">— Ummove</div>
+      </section>
+
+      <!-- 13. CTA -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="cta-head">El <span class="cyan semi">siguiente paso</span></div>
+        <div class="cta-divider"></div>
+        <div class="cta-email">contacto@ummove.com</div>
+        <div class="cta-url">ummove.com</div>
+      </section>
+
+      <!-- 14. CIERRE -->
+      <section data-transition="fade" data-transition-speed="slow">
+        <div class="blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+        <img src="./logo-plain.png" class="logo-end" alt="Ummove">
+        <div class="end-tag">Muevete con Ummove</div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'fade',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: true,
+      controls: true,
+      controlsLayout: 'edges',
+      progress: true,
+      slideNumber: false,
+      width: 1920,
+      height: 1080,
+      margin: 0.1,
+      minScale: 0.2,
+      maxScale: 2.0,
+    });
+  </script>
+</body>
+</html>
