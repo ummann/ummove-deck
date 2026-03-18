@@ -114,7 +114,9 @@
       justify-content: center;
       align-items: center;
       height: 100%;
+      width: 100% !important;
       padding: 60px 80px;
+      box-sizing: border-box;
     }
 
     .reveal h1, .reveal h2, .reveal h3 {
@@ -186,6 +188,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto;
     }
 
     .orbit-ring {
@@ -569,15 +572,20 @@
     .mobile-only { display: none; }
 
     @media screen and (max-width: 768px) {
-      .reveal .slides section { padding: 32px 20px; }
-      .reveal h2 { font-size: 1.6em; }
-      .reveal h3 { font-size: 1.2em; }
+      .reveal .slides section {
+        padding: 32px 20px;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .reveal h2 { font-size: 1.6em; width: 100%; }
+      .reveal h3 { font-size: 1.2em; width: 100%; }
       .reveal p { font-size: 0.9em; }
 
       /* Logo - hide orbits on mobile, they break centering */
-      .logo-hero { width: 100px; height: 100px; }
-      .logo-hero-wrap { width: 100px; height: 100px; }
-      .orbit-ring, .orbit-dot { display: none; }
+      .logo-hero { width: 100px; height: 100px; margin: 0 auto; }
+      .logo-hero-wrap { width: 100px; height: 100px; margin: 0 auto; }
+      .orbit-ring, .orbit-dot { display: none !important; }
+      .blobs { display: none; }
 
       /* Headlines - smaller so they don't wrap extra lines */
       .headline { font-size: 1.5em; max-width: 100%; }
