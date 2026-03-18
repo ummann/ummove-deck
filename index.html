@@ -764,6 +764,15 @@
 
       fragments: true,
     });
+
+    // Mobile: remove fragments so all content shows immediately, no extra swipes
+    if (mobile) {
+      document.querySelectorAll('.fragment').forEach(function(el) {
+        el.classList.remove('fragment');
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
   </script>
 </body>
 </html>
