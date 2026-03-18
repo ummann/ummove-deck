@@ -174,6 +174,8 @@
     .logo-hero {
       width: 180px;
       height: 180px;
+      position: relative;
+      z-index: 2;
       animation: float 5s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
     }
 
@@ -181,6 +183,9 @@
       position: relative;
       width: 180px;
       height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .orbit-ring {
@@ -189,6 +194,7 @@
       border-radius: 50%;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
+      pointer-events: none;
     }
 
     .orbit-ring-1 { width: 320px; height: 320px; }
@@ -511,6 +517,47 @@
     .reveal .present .logo-end { animation: scale-in 0.8s cubic-bezier(0.34,1.56,0.64,1) both; }
     .reveal .present .end-tag { animation: fade-in 1s ease both 0.5s; }
 
+    /* ===== SWIPE HINT ===== */
+
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(8px); opacity: 1; }
+    }
+
+    .swipe-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounce-down 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .swipe-hint svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--cyan-dim);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .swipe-hint span {
+      font-size: 0.6em;
+      font-weight: 400;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Hide after first slide change */
+    .reveal .swipe-hint.hidden { opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+
     /* ===== FRAGMENTS ===== */
 
     .reveal .fragment { transition: all 0.5s cubic-bezier(0.22,1,0.36,1); }
@@ -605,6 +652,10 @@
           <div class="orbit-dot orbit-dot-1"></div>
           <div class="orbit-dot orbit-dot-2"></div>
           <img src="./logo-plain.png" class="logo-hero" alt="Ummove">
+        </div>
+        <div class="swipe-hint" id="swipeHint">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          <span>Desliza</span>
         </div>
       </section>
 
@@ -773,6 +824,12 @@
         el.style.transform = 'none';
       });
     }
+
+    // Hide swipe hint after first slide change
+    Reveal.on('slidechanged', function() {
+      var hint = document.getElementById('swipeHint');
+      if (hint) hint.classList.add('hidden');
+    });
   </script>
 </body>
 </html>
